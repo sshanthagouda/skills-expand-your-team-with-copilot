@@ -32,6 +32,40 @@
   --info-light: #d1ecf1;
 }
 
+/* Dark mode colors */
+body.dark-mode {
+  /* Primary colors - adjusted for dark mode */
+  --primary: #7986cb;
+  --primary-light: #aab6fe;
+  --primary-dark: #49599a;
+  --primary-text: #ffffff;
+
+  /* Secondary colors - adjusted for dark mode */
+  --secondary: #ff9800;
+  --secondary-light: #ffb74d;
+  --secondary-dark: #f57c00;
+  --secondary-text: #000000;
+
+  /* Neutral colors - inverted for dark mode */
+  --background: #121212;
+  --surface: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --border: #333333;
+  --border-light: #2a2a2a;
+  --border-focus: #444444;
+
+  /* Feedback colors - adjusted for dark mode */
+  --success: #66bb6a;
+  --success-light: #1b5e20;
+  --warning: #ffa726;
+  --warning-light: #4d3200;
+  --error: #ef5350;
+  --error-light: #5d1a1a;
+  --info: #29b6f6;
+  --info-light: #0d3b4d;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -663,4 +697,33 @@ footer {
 
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode toggle button */
+#dark-mode-toggle {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+#dark-mode-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Adjust user controls position when dark mode toggle is present */
+header #user-controls {
+  right: 60px;
 }
