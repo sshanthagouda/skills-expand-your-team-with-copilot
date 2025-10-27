@@ -30,6 +30,9 @@
   --error-light: #ffebee;
   --info: #0c5460;
   --info-light: #d1ecf1;
+
+  /* Layout spacing */
+  --header-control-spacing: 60px;
 }
 
 /* Dark mode colors */
@@ -725,5 +728,5 @@ footer {
 
 /* Adjust user controls position when dark mode toggle is present */
 header #user-controls {
-  right: 60px;
+  right: var(--header-control-spacing);
 }

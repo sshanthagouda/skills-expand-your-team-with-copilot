@@ -56,28 +56,38 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Dark mode functionality
+  function updateThemeIcon(isDarkMode) {
+    themeIcon.textContent = isDarkMode ? "☀️" : "🌙";
+  }
+
   function initializeDarkMode() {
     // Check for saved theme preference or default to light mode
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
+    let savedTheme = "light";
+    try {
+      savedTheme = localStorage.getItem("theme") || "light";
+    } catch (e) {
+      console.warn("Could not access localStorage:", e);
+    }
+    
+    const isDarkMode = savedTheme === "dark";
+    if (isDarkMode) {
       document.body.classList.add("dark-mode");
-      themeIcon.textContent = "☀️";
     } else {
       document.body.classList.remove("dark-mode");
-      themeIcon.textContent = "🌙";
     }
+    updateThemeIcon(isDarkMode);
   }
 
   function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
+    const isDarkMode = document.body.classList.contains("dark-mode");
     
     // Update icon and save preference
-    if (document.body.classList.contains("dark-mode")) {
-      themeIcon.textContent = "☀️";
-      localStorage.setItem("theme", "dark");
-    } else {
-      themeIcon.textContent = "🌙";
-      localStorage.setItem("theme", "light");
+    updateThemeIcon(isDarkMode);
+    try {
+      localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    } catch (e) {
+      console.warn("Could not save theme preference:", e);
     }
   }
 
