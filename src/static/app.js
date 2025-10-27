@@ -664,16 +664,34 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
 
       case "copy":
-        // Copy link to clipboard
-        navigator.clipboard
-          .writeText(activityUrl)
-          .then(() => {
+        // Copy link to clipboard with fallback for older browsers
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(activityUrl)
+            .then(() => {
+              showMessage("Link copied to clipboard!", "success");
+            })
+            .catch((err) => {
+              console.error("Failed to copy link:", err);
+              showMessage("Failed to copy link", "error");
+            });
+        } else {
+          // Fallback for browsers without clipboard API
+          const textArea = document.createElement("textarea");
+          textArea.value = activityUrl;
+          textArea.style.position = "fixed";
+          textArea.style.left = "-999999px";
+          document.body.appendChild(textArea);
+          textArea.select();
+          try {
+            document.execCommand("copy");
             showMessage("Link copied to clipboard!", "success");
-          })
-          .catch((err) => {
+          } catch (err) {
             console.error("Failed to copy link:", err);
             showMessage("Failed to copy link", "error");
-          });
+          }
+          document.body.removeChild(textArea);
+        }
         break;
     }
   }
